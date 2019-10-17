@@ -64,7 +64,7 @@ public class Place {
 	}
 	
 	public void ViewPlace() {
-		
+		//As a Jamaica Tourist Board Administrator, I should be able to view all places in the system.
 	}
 	
 	
@@ -136,7 +136,7 @@ public class Place {
 		System.out.println("ID: " + getId() + " " + "Name: " + getName() + " " + "Description: " + getDescription() 
 			+ " " + "Parish Code: " + getParish_code() + " " + "Entry Cost: " + getEntry_cost() + " " 
 			+ "Opening Hrs: " + getOpening_hours() + " " + "Contract#: " + getContact_number() + " " 
-			+"Photo: " + getPhoto() + " " + "Attration: " + getAttration() + "\n")
+			+"Photo: " + getPhoto() + " " + "Attration: " + getAttration() + "\n");
 	}
 
 }
