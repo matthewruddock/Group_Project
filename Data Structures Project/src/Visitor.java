@@ -12,7 +12,9 @@ public class Visitor extends Users{
 	private static Scanner input = new Scanner(System.in);
 	static LocalDateTime myDateObj = LocalDateTime.now();  
     static DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");  
-    static String formattedDate = myDateObj.format(myFormatObj); 
+    static String formattedDate = myDateObj.format(myFormatObj);
+	private String pname;
+	
 	
 	//Methods
 	public void viewPhrases() {
@@ -33,17 +35,30 @@ public class Visitor extends Users{
 	}
 	
 	public void RequestAttractionDetails() {
+		PlaceLinkedList pl_list = new PlaceLinkedList();
+		Place place = new Place();
+		int requestID=0;;
+		System.out.println("Today's Date and Time: "+ formattedDate+"\n"); 
 		System.out.println("Request Attraction Details \n");
 		
 		//As a visitor, I should be able to request the name, address, contact number and main attractions 
 		//by typing the following creole statement : ​“Which part have di cheapest [Attraction Name]”​. 
 		//Sample attractions include “jerk chicken”, “river tours”, “water slides”
 		
-		System.out.println("Request the name, address, contact number and main attractions by typing the following creole statement :"
-				+ " \n Which part have di cheapest [Attraction Name]. ");
+		System.out.println("Which part have di cheapest [Attraction Name]. ");
+		pname = input.next();
+		place = pl_list.showRequestAttraction(pname);
 		
+		//requestID= 
 		
-		
+		System.out.println("\n     Visitor Request \n");
+		System.out.println("Name: "+ getFirstName() + " " + getLastName() + " \n" 
+							+ "Email: " + getEmail() + "\n"
+							+ "Attraction ID : " + place.getId() +"\n"
+							+ "Attraction: " + place.getAttration() + "\n"
+							+ "Message"+ "\n"
+							+ "Request ID: " + requestID +"\n"
+							+ "Date and Time: " + formattedDate);
 		//As a visitor, I should be able to request additional details on an attraction offered by a place. 
 		//Each request should include my first name, last name, email, attraction generated id, attraction name 
 		//and message, request id, date and time (id, date and time should be system generated).
@@ -51,13 +66,18 @@ public class Visitor extends Users{
 	}
 	
 	public void RequestListofPlaces() {
+		PlaceLinkedList pl_list = new PlaceLinkedList();
+		System.out.println("Today's Date and Time: "+ formattedDate+"\n"); 
 		System.out.println("Request List of Places \n");
 		
 		//As a visitor, I should be able to request a listing of places in a parish by typing 
 		//the following creole statement : ​“Gimmi all a di place dem inna [Parish Name]”​.
 		
-		System.out.println("Request a listing of places in a parish by typing the following creole statement :"
-				+ "\n ​“Gimmi all a di place dem inna [Parish Name]​. \n");
+		System.out.println("\n ​“Gimmi all a di place dem inna [Parish Name]​. \n");
+		
+		
+		pname = input.next();
+		pl_list.showRequestLOP(pname);
 	}
 	
 	

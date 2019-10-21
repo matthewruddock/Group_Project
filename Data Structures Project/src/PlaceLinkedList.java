@@ -49,7 +49,7 @@ public class PlaceLinkedList { //For Place Class
 	
 	
 	
-	public Place Retrieve(int sVal) {// search for place and return record
+	public Place Retrieve(String sVal) {// search for place and return record
 		if(isEmpty()) {
  			System.out.println("List is empty \n");
  		}
@@ -58,7 +58,7 @@ public class PlaceLinkedList { //For Place Class
 		 	Node current = head;
 
  			while(current !=null) {
- 				if(current.getData().getId()==sVal) {	 				
+ 				if(current.getData().getName().equals(sVal)) {	 				
 	 				return current.getData();
  				}
  				else {
@@ -99,6 +99,28 @@ public class PlaceLinkedList { //For Place Class
 		return null;
 	}
 	
+	public int Search(String sVal) {// search for place and return record
+		if(isEmpty()) {
+ 			System.out.println("List is empty \n");
+ 		}
+	 
+	 else {
+		 	Node current = head;
+
+ 			while(current !=null) {
+ 				if(current.getData().getName().equals(sVal)) {	 				
+	 				return 1;
+ 				}
+ 				else {
+ 					current = current.getNext();
+ 				}
+ 			}
+ 		}
+	return 0 ;
+	 
+ 		
+	}
+	
 	
 
 	
@@ -115,6 +137,43 @@ public class PlaceLinkedList { //For Place Class
 		}
 	}
 	
+	public void showRequestLOP(String sVal) {// Show all the places in a specific parish.....
+		if (isEmpty()) {
+			System.out.println("List is Empty\n");
+		}
+		else {
+		 	Node current = head;
+
+ 			while(current !=null) {
+ 				if(current.getData().getName().equals(sVal)) {	 				
+	 				current.getData().display();
+ 				}
+ 				else {
+ 					current = current.getNext();
+ 				}
+ 			}
+ 		}
+	}
+	
+	public Place showRequestAttraction(String sVal) {
+		if (isEmpty()) {
+			System.out.println("List is Empty\n");
+		}
+		else {
+		 	Node current = head;
+
+ 			while(current !=null) {
+ 				if(current.getData().getAttration().equals(sVal)) {	 				
+ 					return current.getData();
+ 				}
+ 				else {
+ 					current = current.getNext();
+ 				}
+ 			}
+ 		}
+		return null ;
+	}
+	
 	public void destory() {
 		Node current = new Node();
 		
@@ -126,7 +185,7 @@ public class PlaceLinkedList { //For Place Class
 			
 		}
 	}
-	
+
 	
 	
 

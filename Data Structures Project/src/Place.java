@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 
 public class Place {
 
@@ -7,7 +11,7 @@ public class Place {
 	private String  Address;
 	private int Parish_code; 
 	private float Entry_cost; 
-	private int Opening_hours;
+	private String Opening_hours;
 	private String Contact_number;
 	private String Photo;
 	private String Attration;
@@ -20,7 +24,7 @@ public class Place {
 		Address="";
 		Parish_code  = 0; 
 		Entry_cost=0; 
-		Opening_hours =0;
+		Opening_hours ="";
 		Contact_number ="";
 		Photo  = "";
 		Attration="";
@@ -28,7 +32,7 @@ public class Place {
 	}
 	
 	//Primary Constructor
-	public Place(int i, String name, String description, String address, int parish_code, float entry_cost, int opening_hours, String contact_number, String photo, String attraction) {
+	public Place(int i, String name, String description, String address, int parish_code, float entry_cost, String opening_hours, String contact_number, String photo, String attraction) {
 		id = i;
 		Name= name; 
 		Description= description;
@@ -61,10 +65,69 @@ public class Place {
 	
 	public void AddPlace() {
 		
+		//clear screen by printing multiple Lines
+				for (int i = 0; i < 10; ++i) System.out.println();
+		Scanner input = new Scanner(System.in);
+		Files FilesObj = new Files();
+		PlaceLinkedList pl_list = new PlaceLinkedList();
+		Place data = new Place();
+		System.out.println("\t\t"+"****The Di Good Place Dem!****"+"\n");
+		System.out.println("\t\t\t"+"   Add Place  "+"\n"+"\n");
+		
+		try{
+			//system generated id
+			System.out.println(" Enter name of Place: ");
+			data.setName(input.next());
+			System.out.println("\n Enter Description: ");
+			data.setDescription(input.next());
+			System.out.println("\n Enter Address: ");
+			data.setAddress(input.next());
+			System.out.println("\n Enter Parish Code: ");
+			data.setId(input.nextInt());
+			System.out.println("\n Enter Entry Cost: ");
+			data.setEntry_cost(input.nextFloat());
+			System.out.println("\n Enter Opening hours: ");
+			data.setOpening_hours(input.next());
+			System.out.println("\n Enter Contact Number: ");
+			data.setContact_number(input.next());
+			System.out.println("\n Enter Photo: ");
+			data.setPhoto(input.next());
+			System.out.println("\n Enter Attraction: ");
+			data.setAttration(input.next());
+		}catch(InputMismatchException e){
+			System.err.println("Wrong input type entered");
+		}
+		int flag = pl_list.Search(data.Name);
+		
+		if (flag==0) {
+			//Save to File
+			pl_list.add(data);
+		}
+		if (flag==1)
+			System.out.println("\n*****Name already exist******");
+		try {
+			System.in.read();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 	
 	public void ViewPlace() {
 		//As a Jamaica Tourist Board Administrator, I should be able to view all places in the system.
+		//clear screen by printing multiple Lines
+				for (int i = 0; i < 10; ++i) System.out.println();
+				PlaceLinkedList pl_list = new PlaceLinkedList();
+
+				
+				System.out.println("\t\t"+"****The Di Good Place Dem!****"+"\n");
+				System.out.println("\t\t\t"+"   View Places  "+"\n"+"\n");
+				
+				//Function retrieve Places
+				pl_list.show();
 	}
 	
 	
@@ -107,10 +170,10 @@ public class Place {
 	public void setEntry_cost(float entry_cost) {
 		this.Entry_cost = entry_cost;
 	}
-	public int getOpening_hours() {
+	public String getOpening_hours() {
 		return Opening_hours;
 	}
-	public void setOpening_hours(int opening_hours) {
+	public void setOpening_hours(String opening_hours) {
 		this.Opening_hours = opening_hours;
 	}
 	public String getContact_number() {
