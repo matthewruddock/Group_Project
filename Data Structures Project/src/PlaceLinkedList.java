@@ -39,7 +39,6 @@ public class PlaceLinkedList { //For Place Class
 				Node current = head;
 				while(current.getNext()!=null) {
 					current = current.getNext();
-					
 				}
 				current.setNext(next);
 			}
@@ -76,7 +75,6 @@ public class PlaceLinkedList { //For Place Class
 			System.out.println("List is Empty\n");
 		}
 		else {
-			
 			//Pine data = head.getData(); 
 			Node current = head;
 			Node DeleteItem = current;
@@ -102,6 +100,7 @@ public class PlaceLinkedList { //For Place Class
 	public int Search(String sVal) {// search for place and return record
 		if(isEmpty()) {
  			System.out.println("List is empty \n");
+ 			return 0;
  		}
 	 
 	 else {
@@ -111,14 +110,10 @@ public class PlaceLinkedList { //For Place Class
  				if(current.getData().getName().equals(sVal)) {	 				
 	 				return 1;
  				}
- 				else {
- 					current = current.getNext();
- 				}
+ 				current = current.getNext();
  			}
  		}
-	return 0 ;
-	 
- 		
+	return -1;
 	}
 	
 	
@@ -178,9 +173,7 @@ public class PlaceLinkedList { //For Place Class
 		Node current = new Node();
 		
 		while(head!=null) {
-			
 			current = head;
-			
 			head = head.getNext();
 			
 		}

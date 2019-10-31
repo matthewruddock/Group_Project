@@ -37,7 +37,6 @@ public class Date {
 		return Year;
 	}
 
-	
 	public String DateString() {
 		return Day + "/" + Month + "/" + Year;
 	}
