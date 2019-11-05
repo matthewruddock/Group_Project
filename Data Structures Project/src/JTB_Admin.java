@@ -1,29 +1,47 @@
+//Done by Matthew Ruddock - 1700241
+import java.util.Scanner;
 
 public class JTB_Admin extends Users {
 	
-	public void ViewVisitorsRequest() {
-		//As a Jamaica Tourist Board Administrator, 
-		//I should be able to view the set of visitor requests in the order they were made.
-	}
+	private Place place = new Place();
+	private Scanner input;
+	VisitorRequest VR = new VisitorRequest();
 	
-	public void ProcessVisitorsRequest() {
-		//As a Jamaica Tourist Board Administrator, I should be able to process the visitor requests in the order they were made. 
-		//When a visitor request is identified as processed it is 5 of 7 removed from the set of visitor requests 
-		//, awaiting to be processed and added to the processed log.
-	}
-	
-	public void AddVisitorRequest() {
+	public int loginUser(){
+		input = new Scanner(System.in);
+		String name=null;
+		String pw = null;
+		int id=0;
+		//Prompt User
+		System.out.println("______________________________________________________________________"+"\n"); 
+		System.out.println("\t\t"+"****The Di Good Place Dem!****"+"\n");
+		System.out.println("\t\t"+"------------LOGIN MENU------------\n");
+			System.out.println("Enter Name#: ");
+			name = input.next();
+			
+			System.out.println("Enter Password: ");
+			pw = input.next();
+			
+			if(name.equals("admin")&& pw.equals("admin"))
+				id = 1;
+		return id;
 		
-	}
-	
-	public void ProcessLog() {
-		//As a Jamaica Tourist Board Administrator, I should be able to view the process log in the
-		//order of most recently processed first. The process log contains the set of visitor requests
-		//which have been processed.
-	}
-	
-	public void ViewLogins() {
 		
 	}	
-
+	
+	public PlaceLinkedList addPlace() {
+		return place.AddPlace();
+	}
+	
+	public void viewPlace() {
+		place.display();
+	}
+	public void processRequest() {
+		
+		VR.ProcessVisitorsRequest();
+	}
+	public void viewRequest() {
+		VR.ProcessLog();
+	}
+	
 }

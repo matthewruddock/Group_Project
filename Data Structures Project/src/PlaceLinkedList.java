@@ -1,7 +1,7 @@
 
 public class PlaceLinkedList { //For Place Class
 
-	private Node head;
+	private PlaceNode head;
 	
 	public PlaceLinkedList() {
 		head=null;
@@ -16,7 +16,7 @@ public class PlaceLinkedList { //For Place Class
 	}
 	
 	public boolean isFull() {
-		Node current = new Node();
+		PlaceNode current = new PlaceNode();
 		
 		if(current==null)
 			return true;
@@ -29,17 +29,16 @@ public class PlaceLinkedList { //For Place Class
 			System.out.println("List is full, unable to add \n");
 		
 		else {
-			Node next = new Node();
+			PlaceNode next = new PlaceNode();
 			next.setData(data);
 			
 			if(isEmpty()) {
 				head = next;
 			}
 			else {
-				Node current = head;
+				PlaceNode current = head;
 				while(current.getNext()!=null) {
 					current = current.getNext();
-					
 				}
 				current.setNext(next);
 			}
@@ -55,7 +54,7 @@ public class PlaceLinkedList { //For Place Class
  		}
 	 
 	 else {
-		 	Node current = head;
+		 	PlaceNode current = head;
 
  			while(current !=null) {
  				if(current.getData().getName().equals(sVal)) {	 				
@@ -76,10 +75,9 @@ public class PlaceLinkedList { //For Place Class
 			System.out.println("List is Empty\n");
 		}
 		else {
-			
 			//Pine data = head.getData(); 
-			Node current = head;
-			Node DeleteItem = current;
+			PlaceNode current = head;
+			PlaceNode DeleteItem = current;
 			while(current!=null) {
 				if(current.getNext()==null) {
 					DeleteItem.setData(current.getData() ); 
@@ -102,23 +100,20 @@ public class PlaceLinkedList { //For Place Class
 	public int Search(String sVal) {// search for place and return record
 		if(isEmpty()) {
  			System.out.println("List is empty \n");
+ 			return 0;
  		}
 	 
 	 else {
-		 	Node current = head;
+		 	PlaceNode current = head;
 
  			while(current !=null) {
  				if(current.getData().getName().equals(sVal)) {	 				
 	 				return 1;
  				}
- 				else {
- 					current = current.getNext();
- 				}
+ 				current = current.getNext();
  			}
  		}
-	return 0 ;
-	 
- 		
+	return -1;
 	}
 	
 	
@@ -129,7 +124,7 @@ public class PlaceLinkedList { //For Place Class
 			System.out.println("List is Empty\n");
 		}
 		else {
-			Node current = head;
+			PlaceNode current = head;
 			while (current !=null) {
 				current.getData().display();
 				current = current.getNext();
@@ -142,7 +137,7 @@ public class PlaceLinkedList { //For Place Class
 			System.out.println("List is Empty\n");
 		}
 		else {
-		 	Node current = head;
+		 	PlaceNode current = head;
 
  			while(current !=null) {
  				if(current.getData().getName().equals(sVal)) {	 				
@@ -160,7 +155,7 @@ public class PlaceLinkedList { //For Place Class
 			System.out.println("List is Empty\n");
 		}
 		else {
-		 	Node current = head;
+		 	PlaceNode current = head;
 
  			while(current !=null) {
  				if(current.getData().getAttration().equals(sVal)) {	 				
@@ -175,12 +170,10 @@ public class PlaceLinkedList { //For Place Class
 	}
 	
 	public void destory() {
-		Node current = new Node();
+		PlaceNode current = new PlaceNode();
 		
 		while(head!=null) {
-			
 			current = head;
-			
 			head = head.getNext();
 			
 		}

@@ -1,6 +1,6 @@
 
 public class JTBLinkedList {// for Users class
-		private Node head;
+		private UserNode head;
 		
 		public JTBLinkedList() {
 			head=null;
@@ -15,7 +15,7 @@ public class JTBLinkedList {// for Users class
 		}
 		
 		public boolean isFull() {
-			Node current = new Node();
+			UserNode current = new UserNode();
 			
 			if(current==null)
 				return true;
@@ -28,14 +28,14 @@ public class JTBLinkedList {// for Users class
 				System.out.println("List is full, unable to add \n");
 			
 			else {
-				Node next = new Node();
+				UserNode next = new UserNode();
 				next.setData(data);
 				
 				if(isEmpty()) {
 					head = next;
 				}
 				else {
-					Node current = head;
+					UserNode current = head;
 					while(current.getNext()!=null) {
 						current = current.getNext();
 						
@@ -47,7 +47,7 @@ public class JTBLinkedList {// for Users class
 		}
 		
 		public void destory() {
-			Node current = new Node();
+			UserNode current = new UserNode();
 			
 			while(head!=null) {
 				
@@ -58,13 +58,13 @@ public class JTBLinkedList {// for Users class
 			}
 		}
 		
-		public Place Retrieve(int sVal) {// search for user and return record
+		public Users Retrieve(int sVal) {// search for user and return record
 			if(isEmpty()) {
 	 			System.out.println("List is empty \n");
 	 		}
 		 
 		 else {
-			 	Node current = head;
+			 	UserNode current = head;
 
 	 			while(current !=null) {
 	 				if(current.getData().getId()==sVal) {	 				
@@ -85,7 +85,7 @@ public class JTBLinkedList {// for Users class
 				System.out.println("List is Empty\n");
 			}
 			else {
-				Node current = head;
+				UserNode current = head;
 				while (current !=null) {
 					current.getData().display();
 					current = current.getNext();

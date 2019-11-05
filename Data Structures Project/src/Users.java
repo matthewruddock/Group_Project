@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class Users {
 	private int id;
@@ -5,29 +6,6 @@ public class Users {
 	private Date date = new Date();
 	private Time time = new Time();
 	
-	//Methods
-		public Users AccessLogin() {
-			Users login = null;
-			
-			return login;
-		}
-	
-	
-	public void createUser() {
-		
-	}
-	
-	public int loginUser(){
-		//check passport number?
-		return id;
-		
-		
-	}
-	public int logoutUser(){
-		return id;
-		
-	}
-
 	//Getters and Setters
 		public int getId() {
 			return id;
@@ -42,6 +20,14 @@ public class Users {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	@Override
+	public String toString() {
+		return "Users [id=" + id + ", type=" + type + ", date=" + date + ", time=" + time + "]";
+	}
+	
+	public void display() {
+		System.out.println(toString()+"\n");
 	}
 
 

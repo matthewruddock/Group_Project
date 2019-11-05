@@ -1,3 +1,4 @@
+//Done by Matthew Ruddock - 1700241
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -63,7 +64,7 @@ public class Place {
 	
 	//Methods
 	
-	public void AddPlace() {
+	public PlaceLinkedList AddPlace() {
 		
 		//clear screen by printing multiple Lines
 				for (int i = 0; i < 10; ++i) System.out.println();
@@ -73,47 +74,48 @@ public class Place {
 		Place data = new Place();
 		System.out.println("\t\t"+"****The Di Good Place Dem!****"+"\n");
 		System.out.println("\t\t\t"+"   Add Place  "+"\n"+"\n");
-		
-		try{
-			//system generated id
-			System.out.println(" Enter name of Place: ");
-			data.setName(input.next());
-			System.out.println("\n Enter Description: ");
-			data.setDescription(input.next());
-			System.out.println("\n Enter Address: ");
-			data.setAddress(input.next());
-			System.out.println("\n Enter Parish Code: ");
-			data.setId(input.nextInt());
-			System.out.println("\n Enter Entry Cost: ");
-			data.setEntry_cost(input.nextFloat());
-			System.out.println("\n Enter Opening hours: ");
-			data.setOpening_hours(input.next());
-			System.out.println("\n Enter Contact Number: ");
-			data.setContact_number(input.next());
-			System.out.println("\n Enter Photo: ");
-			data.setPhoto(input.next());
-			System.out.println("\n Enter Attraction: ");
-			data.setAttration(input.next());
-		}catch(InputMismatchException e){
-			System.err.println("Wrong input type entered");
-		}
-		int flag = pl_list.Search(data.Name);
-		
-		if (flag==0) {
-			//Save to File
-			pl_list.add(data);
-		}
-		if (flag==1)
-			System.out.println("\n*****Name already exist******");
-		try {
-			System.in.read();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
+		int flag = 1;
+		do {
+			try{
+				//system generated id
+				System.out.println(" Enter name of Place: ");
+				data.setName(input.next());
+				System.out.println("\n Enter Description: ");
+				data.setDescription(input.next());
+				System.out.println("\n Enter Address: ");
+				data.setAddress(input.next());
+				System.out.println("\n Enter Parish Code: ");
+				parish_codes();
+				data.setId(input.nextInt());
+				System.out.println("\n Enter Entry Cost: ");
+				data.setEntry_cost(input.nextFloat());
+				System.out.println("\n Enter Opening hours: ");
+				data.setOpening_hours(input.next());
+				System.out.println("\n Enter Contact Number: ");
+				data.setContact_number(input.next());
+				System.out.println("\n Enter Photo: ");
+				data.setPhoto(input.next());
+				System.out.println("\n Enter Attraction: ");
+				data.setAttration(input.next());
+			}catch(InputMismatchException e){
+				System.err.println("Wrong input type entered");
+			}
+			flag = pl_list.Search(data.Name);
+			
+			if (flag==0) {
+				//Save to File
+				pl_list.add(data);
+			}
+			if (flag==1)
+				System.out.println("\n*****Name already exist******");
+			try {
+				System.in.read();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} while(flag == 1);
+		return pl_list;
 	}
 	
 	public void ViewPlace() {
@@ -193,6 +195,15 @@ public class Place {
 	}
 	public void setAttration(String attration) {
 		this.Attration = attration;
+	}
+	public void parish_codes() {
+		int [] code = {1,2,3,4,5,6,7,8,9,10,11,12,13};
+		String [] parish_name = {"Kingston & St. Andrew","St. Thomas","Portland", "St. Mary","St. Catherine","Clarendon"
+				,"Manchester","St. Ann","St. Elizabeth", "St. James","Hanover","Westmoreland","Trelawny"};
+		System.out.println("Code" + " | " + " Parish Name\n______________________________\n");
+		for(int i=0;i<=12;i++) {
+			System.out.println("  " + code[i] + "  -  " + parish_name[i] );
+		}
 	}
 
 	public void display(){
