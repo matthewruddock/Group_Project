@@ -1,3 +1,4 @@
+//Done by Matthew Ruddock - 1700241
 import java.util.Scanner;
 import java.io.IOException;
 import java.time.LocalDateTime;  // Import the LocalDateTime class
@@ -7,10 +8,12 @@ public class Driver {
 	Users UsersObj = new Users();
 	Visitor VisitorObj = new Visitor();
 	JTB_Admin JTB_AdminObj = new JTB_Admin ();
+	VisitorRequest VRObj = new VisitorRequest ();
 	
 	private static int choice = 0;
 	static int alive = 1; //state of main program
 	private static Scanner input = new Scanner(System.in);
+	
 	static LocalDateTime myDateObj = LocalDateTime.now();  
     static DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");  
     static String formattedDate = myDateObj.format(myFormatObj);  
@@ -21,6 +24,8 @@ public class Driver {
 	public int menuVisitor() {
 		int alive = 1; //state of main program
 		while(alive==1) {
+			//clear screen by printing multiple Lines
+			for (int i = 0; i < 10; ++i) System.out.println();
 			//Initialise choice
 			choice = 0;
 			System.out.println("______________________________________________________________________"+"\n");
@@ -74,8 +79,9 @@ public class Driver {
 			System.out.println("1. View Visitors Request"+"\n");
 			System.out.println("2. Process Visitors Request"+"\n");
 			System.out.println("3. Process Log"+"\n");
-			System.out.println("4. View Logins"+"\n");
+			System.out.println("4. Add Place"+"\n");
 			System.out.println("5. View Place"+"\n");
+			
 			System.out.println("0. Exit System"+"\n");
 			System.out.println("______________________________________________________________________"+"\n");
 			
@@ -89,16 +95,18 @@ public class Driver {
 			
 			//Functions
 			if(choice==1) { 
-				JTB_AdminObj.ViewVisitorsRequest(); 
+				VRObj.ViewVisitorsRequest(); 
 			}
 			else if(choice==2) {
-				JTB_AdminObj.ProcessVisitorsRequest(); 
+				VRObj.ProcessVisitorsRequest(); 
 			}
 			else if(choice==3) {
-				JTB_AdminObj.ProcessLog(); 
+				VRObj.ProcessLog(); 
 			}
 			else if(choice==4) {
-				JTB_AdminObj.ViewLogins(); 
+				JTB_Admin admin = new JTB_Admin();
+				admin.addPlace().show();
+				
 			}
 			else if(choice==5) {
 				 PlaceObj.ViewPlace();
@@ -114,10 +122,10 @@ public class Driver {
 	}
 	public static void main(String[] args) throws IOException {
 		//Date and Time
-		
 	    
 		Driver DriverObj = new Driver();
 		Users UsersObj = new Users();
+		JTB_Admin AdminObj= new JTB_Admin();
 		int loginVerification = 0 ;
 		alive = 1; //state of main program
 		
@@ -131,7 +139,6 @@ public class Driver {
 			System.out.println("\t"+"   Welcomes All Visting and Returning Residents"+"\n"+"\n");
 			System.out.println("1. Visitor"+"\n");
 			System.out.println("2. Admin"+"\n");
-			System.out.println("3. Logout User"+"\n");
 			System.out.println("0. Exit System"+"\n");
 			System.out.println("______________________________________________________________________"+"\n");
 			
@@ -149,12 +156,11 @@ public class Driver {
 				DriverObj.menuVisitor(); 
 			}
 			else if(choice==2) {//Admin
-				//loginVerification = UsersObj.loginUser();
-				DriverObj.menuAdmin(); 
+				loginVerification = AdminObj.loginUser();
+				if(loginVerification == 1)
+					DriverObj.menuAdmin(); 
 			}
-			else if(choice==3) {//Logout
-				loginVerification = UsersObj.logoutUser();
-			}
+			
 			else if(choice==0) {
 				alive = 0;
 				System.exit(0);

@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.time.LocalDateTime;  // Import the LocalDateTime class
 import java.time.format.DateTimeFormatter;  // Import the DateTimeFormatter class
 
@@ -10,6 +11,7 @@ public class Visitor extends Users{
 	private String PassportNumber;
 	
 	private static Scanner input = new Scanner(System.in);
+	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
 	static LocalDateTime myDateObj = LocalDateTime.now();  
     static DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");  
     static String formattedDate = myDateObj.format(myFormatObj);
@@ -18,22 +20,18 @@ public class Visitor extends Users{
 	
 	//Methods
 	public void viewPhrases() {
+		Tree tree = new Tree();
+		tree.insert(new Phrase("Mi soon come","I will be right there"));
+		tree.insert(new Phrase("Mi deh pan a endz","I'm out somewhere having fun"));
+		tree.insert(new Phrase("Wah gwaan?","How are you doing? or What's up?"));
+		tree.insert(new Phrase("Do u ting","Go ahead or Do whatever you want to do"));
+		tree.insert(new Phrase("Hol' a medz/medi","Relaxing or meditating"));
+
 		System.out.println("______________________________________________________________________"+"\n");
 		System.out.println("Today's Date and Time: "+ formattedDate+"\n"); 
 		System.out.println("\t\t"+"****The Di Good Place Dem!****"+"\n");
 		System.out.println("\t\t"+"****Come learn the good phrase dem****\n");
-		System.out.println("Number 1: Wah gwaan?");
-		System.out.println("Translation: How are you doing? or What's up?");
-		System.out.println("\n\nNumber 2: Mi soon come");
-		System.out.println("Translation: I will be right there");
-		System.out.println("\n\nNumber 3: Mi deh pan a endz");
-		System.out.println("Translation: I'm out somewhere having fun");
-		System.out.println("\n\nNumber 4: Do u ting");
-		System.out.println("Translation: Go ahead or Do whatever you want to do");
-		System.out.println("\n\nNumber 5: Hol' a medz/medi");
-		System.out.println("Translation: Relaxing or meditating");
-		System.out.println("\n\nNumber 6: Wah gwaan?");
-		System.out.println("Translation: How are you doing? or What's up?");
+		tree.display();
 		System.out.println("______________________________________________________________________"+"\n");
 		System.out.println("\t\t\tPRESS ANY KEY TO EXIT");
 		try {
@@ -47,7 +45,9 @@ public class Visitor extends Users{
 	public void RequestAttractionDetails() {
 		PlaceLinkedList pl_list = new PlaceLinkedList();
 		Place place = new Place();
-		int requestID=0;;
+		VisitorRequest VRObj = new VisitorRequest ();
+		
+		VRObj.requestID = ID_GENERATOR.getAndIncrement();
 		System.out.println("______________________________________________________________________"+"\n");
 		System.out.println("Today's Date and Time: "+ formattedDate+"\n"); 
 		System.out.println("\t\t"+"****The Di Good Place Dem!****"+"\n");
@@ -60,10 +60,14 @@ public class Visitor extends Users{
 		System.out.println("Type the following, *Which part have di cheapest [Attraction Name]*, to see cheapest attraction."
 				+ "\nSample attractions include “jerk chicken”, “river tours”, “water slides” ");
 		pname = input.next();
+		pname = pname.substring(28); // get characters after cheapest
 		
 		//place = pl_list.showRequestAttraction(pname);
+		VRObj.place = place;
+		VRObj.visitor.setFirstName(getFirstName());
+		VRObj.visitor.setLastName(getLastName());
+		VRObj.visitor.setEmail(getEmail());
 		
-		//requestID= 
 		System.out.println("______________________________________________________________________"+"\n");
 		System.out.println("\n\t\t****Visitor Request****\n");
 		System.out.println("Name: "+ getFirstName() + " " + getLastName() + " \n" 
@@ -71,11 +75,13 @@ public class Visitor extends Users{
 							+ "Attraction ID : " + place.getId() +"\n"
 							+ "Attraction: " + place.getAttration() + "\n"
 							+ "Message: "+ "\n"
-							+ "Request ID: " + requestID +"\n"
+							+ "Request ID: " + VRObj.requestID +"\n"
 							+ "Date and Time: " + formattedDate);
 		//As a visitor, I should be able to request additional details on an attraction offered by a place. 
 		//Each request should include my first name, last name, email, attraction generated id, attraction name 
 		//and message, request id, date and time (id, date and time should be system generated).
+		
+		VRObj.AddVisitorRequest(VRObj);
 		
 		System.out.println("______________________________________________________________________"+"\n");
 		System.out.println("\t\t\tPRESS ANY KEY TO EXIT");
@@ -100,9 +106,8 @@ public class Visitor extends Users{
 		//the following creole statement : ​“Gimmi all a di place dem inna [Parish Name]”​.
 		
 		System.out.println("\n ​“Gimmi all a di place dem inna [Parish Name]​. \n");
-		
-		
 		pname = input.next();
+		pname = pname.substring(30); //copy name after inna
 		pl_list.showRequestLOP(pname);
 		
 		System.out.println("______________________________________________________________________"+"\n");
